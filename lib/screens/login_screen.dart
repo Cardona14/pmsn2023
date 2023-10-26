@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
           image: DecorationImage(
             opacity: .5,
             fit: BoxFit.fill,
-            image: NetworkImage('https://images.squarespace-cdn.com/content/v1/571fc5edd210b89083925aba/1587497063492-3M55NJG231XKWL9PLFL2/Liam_Wong_Tokyo_Nights_Phone_Wallpapers_Cyberpunk_Blade_Runner_TOKYOO_TO_KY_OO_Japan_BookMinutes+To+Midnight.jpg')
+            image: NetworkImage('https://i.pinimg.com/originals/73/4c/52/734c524293d18ce697a78a25842ed328.png')
           )
         ),
         child: Padding(
@@ -65,8 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Container(
                   height: 200,
-                  margin: const EdgeInsets.symmetric(horizontal: 30),
-                  padding: const EdgeInsets.all(30),
+                  padding: EdgeInsets.all(30),
+                  margin: EdgeInsets.symmetric(horizontal: 30),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white
