@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pmsn2023/assets/global_values.dart';
 import 'package:pmsn2023/database/agendadb.dart';
 import 'package:pmsn2023/models/task_model.dart';
-import 'package:pmsn2023/widgets/CardTaskWidget.dart';
+import 'package:pmsn2023/widgets/card_task_widget.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({super.key});
@@ -24,7 +24,7 @@ class _TaskScreenState extends State<TaskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Task Manager'),
+        title: const Text('Task Manager'),
         actions: [
           IconButton(
             onPressed: ()=>Navigator.pushNamed(context, '/add')
@@ -32,7 +32,7 @@ class _TaskScreenState extends State<TaskScreen> {
                 setState(() {});
               }
             ), 
-            icon: Icon(Icons.task)
+            icon: const Icon(Icons.task)
           )
         ],
       ),
@@ -59,7 +59,7 @@ class _TaskScreenState extends State<TaskScreen> {
                     child: Text('Error!'),
                   );
                 }else{
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 }
               }
             }

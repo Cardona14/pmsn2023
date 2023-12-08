@@ -3,6 +3,7 @@ import 'package:pmsn2023/assets/global_values.dart';
 import 'package:pmsn2023/database/agendadb.dart';
 import 'package:pmsn2023/models/task_model.dart';
 
+// ignore: must_be_immutable
 class AddTask extends StatefulWidget {
   AddTask({super.key, this.taskModel});
 
@@ -26,13 +27,12 @@ class _AddTaskState extends State<AddTask> {
   AgendaDB? agendaDB;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     agendaDB = AgendaDB();
     if( widget.taskModel != null ){
       txtConName.text = widget.taskModel!.nameTask!;
       txtConDsc.text = widget.taskModel!.dscTask!;
-      switch(widget.taskModel!.sttTask){
+      switch(widget.taskModel!.statusTask){
         case 'E': dropDownValue = "En proceso"; break;
         case 'C': dropDownValue = "Completado"; break;
         case 'P': dropDownValue = "Pendiente";
@@ -60,7 +60,7 @@ class _AddTaskState extends State<AddTask> {
       controller: txtConDsc,
     );
   
-    final space = SizedBox(height: 10,);
+    const space = SizedBox(height: 10);
 
     final DropdownButton ddBStatus = DropdownButton(
       value: dropDownValue,
@@ -80,10 +80,10 @@ class _AddTaskState extends State<AddTask> {
       ElevatedButton(
         onPressed: (){
           if( widget.taskModel == null ){
-            agendaDB!.INSERT('tblTareas', {
+            agendaDB!.insertTask('tblTareas', {
               'nameTask' : txtConName.text,
               'dscTask' : txtConDsc.text,
-              'sttTask' : dropDownValue!.substring(0,1)
+              'statusTask' : dropDownValue!.substring(0,1)
             }).then((value){
               var msj = ( value > 0 ) 
                 ? 'La inserción fue exitosa!'
@@ -94,11 +94,11 @@ class _AddTaskState extends State<AddTask> {
             });
           }
           else{
-            agendaDB!.UPDATE('tblTareas', {
+            agendaDB!.updateTask('tblTareas', {
               'idTask' : widget.taskModel!.idTask,
               'nameTask' : txtConName.text,
               'dscTask' : txtConDsc.text,
-              'sttTask' : dropDownValue!.substring(0,1)
+              'statusTask' : dropDownValue!.substring(0,1)
             }).then((value) {
               GlobalValues.flagTask.value = !GlobalValues.flagTask.value;
               var msj = ( value > 0 ) 
@@ -110,14 +110,14 @@ class _AddTaskState extends State<AddTask> {
             });
           }
         }, 
-        child: Text('Save Task')
+        child: const Text('Save Task')
       );
 
     return Scaffold(
       appBar: AppBar(
         title: widget.taskModel == null 
-          ? Text('Add Task')
-          : Text('Update Task'),
+          ? const Text('Add Task')
+          : const Text('Update Task'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

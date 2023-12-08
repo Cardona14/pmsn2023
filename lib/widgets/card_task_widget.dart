@@ -4,6 +4,7 @@ import 'package:pmsn2023/database/agendadb.dart';
 import 'package:pmsn2023/models/task_model.dart';
 import 'package:pmsn2023/screens/add_task.dart';
 
+// ignore: must_be_immutable
 class CardTaskWidget extends StatelessWidget {
   CardTaskWidget(
     {super.key,required this.taskModel,
@@ -16,8 +17,8 @@ class CardTaskWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
         color: Colors.green
       ),
@@ -47,26 +48,26 @@ class CardTaskWidget extends StatelessWidget {
                     context: context, 
                     builder: (context) {
                       return AlertDialog(
-                        title: Text('Mensaje del sistema'),
-                        content: Text('¿Deseas borrar la tarea?'),
+                        title: const Text('Mensaje del sistema'),
+                        content: const Text('¿Deseas borrar la tarea?'),
                         actions: [
                           TextButton(onPressed:(){
-                            agendaDB!.DELETE('tblTareas', taskModel.idTask!)
+                            agendaDB!.deleteTask('tblTareas', taskModel.idTask!)
                             .then((value){
                               Navigator.pop(context);
                               GlobalValues.flagTask.value = !GlobalValues.flagTask.value;
                             });
-                          }, child: Text('Si')),
+                          }, child: const Text('Si')),
                           TextButton(
                             onPressed:()=>Navigator.pop(context), 
-                            child: Text('No')
+                            child: const Text('No')
                           ),
                         ],
                       );
                     },
                   );
                 },
-                icon: Icon(Icons.delete)
+                icon: const Icon(Icons.delete)
               )
             ],
           )

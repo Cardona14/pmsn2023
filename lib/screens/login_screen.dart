@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pmsn2023/assets/preferences_helper.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -8,17 +9,17 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController txtConUser = TextEditingController();
+  TextEditingController txtConPass = TextEditingController();
+  bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
-
-    TextEditingController txtConUser = TextEditingController();
-    TextEditingController txtConPass = TextEditingController();
-
-
     final txtUser = TextField(
       controller: txtConUser,
       decoration: const InputDecoration(
-        border: OutlineInputBorder()
+        border: OutlineInputBorder(),
+        hintText: 'Usuario'
       ),
     );
 
@@ -26,12 +27,15 @@ class _LoginScreenState extends State<LoginScreen> {
       controller: txtConPass,
       obscureText: true,
       decoration: const InputDecoration(
-        border: OutlineInputBorder()
+        border: OutlineInputBorder(),
+        hintText: 'Contraseña'
       )
     );
 
     final imgLogo = Container(
-      width: 200,
+      width: 300,
+      alignment: Alignment.topCenter,
+      margin: const EdgeInsets.only(top: 30),
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/9/90/Cyberpunk_Edgerunners_logo.png')
@@ -40,12 +44,39 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     final btnEntrar = FloatingActionButton.extended(
-      icon: Icon(Icons.login),
-      label: Text('Entrar'),
-      onPressed: () => Navigator.pushNamed(context, '/dash')
-      /*(){
-        Navigator.pushNamed(context, '/dash')
-      }*/
+      icon: const Icon(Icons.login),
+      label: const Text('Entrar'),
+      onPressed: () async {
+        if (txtConUser.text == '' || txtConPass.text == '') {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return const AlertDialog(
+                title: Text('El correo y la contraseña son datos necesarios'),
+              );
+            }
+          );
+        } else {
+          if (isChecked) {
+            // Cambiar el estado de logeo a verdadero
+            await PreferencesHelper.setLoggedInStatus(true);
+            // ignore: use_build_context_synchronously
+            Navigator.pushReplacementNamed(context, '/dash');
+          } else {
+            Navigator.pushReplacementNamed(context, '/dash');
+          }
+        }
+      }
+    );
+
+    final savecheckbox = CheckboxListTile(
+      title: const Text('Guardar sesión'),
+      value: isChecked, 
+      onChanged: (bool? value) {
+        setState(() {
+          isChecked = value!;
+        });
+      },
     );
 
     return Scaffold(
@@ -59,33 +90,37 @@ class _LoginScreenState extends State<LoginScreen> {
           )
         ),
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 100.0),
+          padding: const EdgeInsets.only(bottom: 50),
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
+              imgLogo,
               Container(
-                  height: 200,
-                  padding: EdgeInsets.all(30),
-                  margin: EdgeInsets.symmetric(horizontal: 30),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white
-                  ),
-                  child: Column(
-                    children:[
-                      txtUser,
-                      const SizedBox(height: 10),
-                      txtPass
-                    ],
-                  ),
+                height: 300,
+                padding: const EdgeInsets.all(15),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.grey.withOpacity(0.8)
                 ),
-                imgLogo
+                child: Column(
+                  children:[
+                    txtUser,
+                    const SizedBox(height: 10),
+                    txtPass,
+                    const SizedBox(height: 10),
+                    savecheckbox,
+                    const SizedBox(height: 10),
+                    btnEntrar
+                  ],
+                ),
+              ),
             ],
           ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, 
-      floatingActionButton: btnEntrar,
+      floatingActionButton: const SizedBox.shrink()
     );
   }
 }

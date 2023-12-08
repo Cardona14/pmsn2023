@@ -5,7 +5,7 @@ class StylesApp {
     final theme = ThemeData.light();
     return theme.copyWith(
       colorScheme: Theme.of(context).colorScheme.copyWith(
-        primary: Color.fromARGB(255, 255, 0, 0),
+        primary: const Color.fromARGB(255, 17, 117, 51),
       )
     );
   }
@@ -14,7 +14,7 @@ class StylesApp {
     final theme = ThemeData.dark();
     return theme.copyWith(
       colorScheme: Theme.of(context).colorScheme.copyWith(
-        primary: Color.fromARGB(255, 50, 10, 10),
+        primary: const Color.fromARGB(255, 27, 57, 106),
       )
     );
   }

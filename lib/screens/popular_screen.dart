@@ -16,7 +16,6 @@ class _PopularScreenState extends State<PopularScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     apiPopular = ApiPopular();
   }
@@ -24,7 +23,18 @@ class _PopularScreenState extends State<PopularScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Popular Movies'),),
+      appBar: AppBar(
+        title: const Text('Popular Movies'),
+        leading: Row(
+            children: <Widget>[
+              const SizedBox(width: 5.0),
+              IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => Navigator.pushNamed(context, '/dash'),
+              ),
+            ],
+          ),
+      ),
       body: FutureBuilder(
         future: apiPopular!.getAllPopular(),
       builder: (context, AsyncSnapshot<List<PopularModel>?> snapshot) {
@@ -44,9 +54,9 @@ class _PopularScreenState extends State<PopularScreen> {
             );
           }else{
             if( snapshot.hasError){
-              return Center(child: Text('Algo salió mal :()'));
+              return const Center(child: Text('Algo salió mal :()'));
             }else{
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             }
           }
         },

@@ -6,7 +6,7 @@ Widget itemMovieWidget(PopularModel movie, context){
     onTap: () => Navigator.pushNamed(context, '/detail', arguments: movie),
     child: FadeInImage(
       fit: BoxFit.fill,
-      fadeInDuration: Duration(milliseconds: 500),
+      fadeInDuration: const Duration(milliseconds: 500),
       placeholder: const AssetImage('assets/loading.gif'),
       image: NetworkImage('https://image.tmdb.org/t/p/w500/${movie.posterPath}')
       ),
