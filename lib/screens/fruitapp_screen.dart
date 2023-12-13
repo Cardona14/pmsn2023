@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pmsn2023/screens/counter.dart';
+import 'package:pmsn2023/widgets/counter.dart';
 import 'package:pmsn2023/widgets/image_carousel_widget.dart';
 
 class FruitAppScreen extends StatefulWidget {
@@ -77,12 +77,12 @@ class _FruitAppScreenState extends State<FruitAppScreen> {
                             style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold)
                           ),
                           const SizedBox(height: 10.0),
-                          const Text('cada uno'),
+                          const Text('\$170 cada uno'),
                           const SizedBox(height: 20.0),
                           const CounterDesign(),
                           const SizedBox(height: 30.0),
                           const Text(
-                            'Product Description',
+                            'Descripción del Producto',
                             style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)
                           ),
                           const SizedBox(height: 15.0),

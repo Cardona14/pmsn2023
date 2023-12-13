@@ -1,23 +1,23 @@
 class TaskModel {
   
   int? idTask;
-  int? idProf;
+  int? idTeacher;
+  int? stateTask;
   String? nameTask;
-  String? dscTask;
-  String? statusTask;
-  DateTime? dateExp;
-  DateTime? dateRem;
+  String? descTask;
+  String? dateExp;
+  String? dateAlert;
 
-  TaskModel({this.idTask,this.nameTask,this.dscTask,this.statusTask, this.dateExp, this.dateRem, this.idProf});
+  TaskModel({this.idTask,this.nameTask,this.descTask,this.stateTask, this.dateExp, this.dateAlert, this.idTeacher});
   factory TaskModel.fromMap(Map<String,dynamic> map){
     return TaskModel(
       idTask: map['idTask'],
       nameTask: map['nameTask'],
-      dscTask: map['dscTask'],
-      statusTask: map['sttTask'],
-      dateExp: map['sttTask'],
-      dateRem: map['sttTask'],
-      idProf: map['sttTask'],
+      descTask: map['descTask'],
+      stateTask: map['stateTask'],
+      dateExp: map['dateExp'],
+      dateAlert: map['dateAlert'],
+      idTeacher: map['idTeacher'],
     );
   }
 }

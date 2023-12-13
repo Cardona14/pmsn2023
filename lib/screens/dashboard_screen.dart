@@ -35,6 +35,21 @@ class DashboardScreen extends StatelessWidget {
             onTap: () => Navigator.pushNamed(context, '/store'),
           ),
           ListTile(
+            trailing: const Icon(Icons.chevron_right),
+            title: const Text('Tareas'),
+            onTap: () => Navigator.pushNamed(context, '/tasks')
+          ),
+          ListTile(
+            trailing: const Icon(Icons.chevron_right),
+            title: const Text('Maestros'),
+            onTap: () => Navigator.pushNamed(context, '/teachers')
+          ),
+          ListTile(
+            trailing: const Icon(Icons.chevron_right),
+            title: const Text('Carreras'),
+            onTap: () => Navigator.pushNamed(context, '/careers')
+          ),
+          ListTile(
             leading: const Icon(Icons.task_alt_outlined),
             trailing: const Icon(Icons.chevron_right),
             title: const Text('Movies'),
@@ -58,6 +73,7 @@ class DashboardScreen extends StatelessWidget {
               }
             }
           ),
+          const Divider(),
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('Cerrar sesión'),
