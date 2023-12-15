@@ -69,25 +69,6 @@ class _TaskScreenState extends State<TaskScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tareas'),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              var res = await agendaDB!.GETALLTEACHERS();
-              if (res.isEmpty) {
-                // ignore: use_build_context_synchronously
-                ArtSweetAlert.show(
-                  context: context,
-                  artDialogArgs: ArtDialogArgs(
-                    type: ArtSweetAlertType.danger,
-                    title: "¡Error!",
-                    text: "Al menos un profesor debe estar registrado para agregar tareas"));
-              } else {
-                Navigator.pushNamed(context, '/addTask');
-              }
-            },
-            icon: const Icon(Icons.add)
-          )
-        ],
       ),
       body: ValueListenableBuilder(
         valueListenable: GlobalValues.flagDB,
@@ -111,9 +92,7 @@ class _TaskScreenState extends State<TaskScreen> {
                         },
                       ),
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
+                    const SizedBox(width: 10),
                     dropDownButtonStates
                   ],
                 ),
@@ -156,19 +135,11 @@ class _TaskScreenState extends State<TaskScreen> {
                                               child: Row(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  Image.asset(
-                                                    'assets/images/image$number.jpg',
-                                                    height: 100,
-                                                    width: 100,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                  Container(width: 20),
                                                   Expanded(
                                                     child: Column(
                                                       crossAxisAlignment:CrossAxisAlignment.start,
                                                       children: [
                                                         Container(height: 5),
-                                                        // Add a title widget
                                                         Text(
                                                           snapshot.data![index].nameTask!,
                                                           style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -248,12 +219,38 @@ class _TaskScreenState extends State<TaskScreen> {
                 ),
               ],
             );
-          }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/calendar');
-        },
-        child: const Icon(Icons.calendar_month_outlined),
+          }
+        ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () async {
+              var res = await agendaDB!.GETALLTEACHERS();
+              if (res.isEmpty) {
+                // ignore: use_build_context_synchronously
+                ArtSweetAlert.show(
+                  context: context,
+                  artDialogArgs: ArtDialogArgs(
+                    type: ArtSweetAlertType.danger,
+                    title: "¡Error!",
+                    text: "Al menos un profesor debe estar registrado para agregar tareas"));
+              } else {
+                Navigator.pushNamed(context, '/addTask');
+              }
+            },
+            heroTag: 'butonAddTask',
+            child: const Icon(Icons.add),
+          ),
+          const SizedBox(height: 16),
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/calendar');
+            },
+            heroTag: 'butonCalendar',
+            child: const Icon(Icons.calendar_month_outlined),
+          ),
+        ],
       ),
     );
   }

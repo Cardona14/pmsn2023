@@ -34,7 +34,7 @@ class CardTaskWidget extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () => Navigator.push(context, MaterialPageRoute( builder: (context) => AddTaskScreen(taskModel: taskModel))),
-                child: Image.asset( 'assets/images/four_sword.png', height: 50),
+                child: Image.asset( 'assets/naranja.png', height: 50),
               ),
               IconButton(
                   onPressed: () {

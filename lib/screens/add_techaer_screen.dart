@@ -129,8 +129,8 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
     return Scaffold(
       appBar: AppBar(
         title: widget.teacherModel == null
-            ? const Text('Mestro agregado')
-            : const Text('Mestro Actualizado'),
+            ? const Text('Agregar maestro')
+            : const Text('Actualizar maestro'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

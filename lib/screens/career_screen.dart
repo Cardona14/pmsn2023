@@ -25,13 +25,6 @@ class _CareerScreenState extends State<CareerScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Carreras'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/addCareer');
-            },
-            icon: const Icon(Icons.add))
-        ],
       ),
       body: ValueListenableBuilder(
           valueListenable: GlobalValues.flagDB,
@@ -71,11 +64,19 @@ class _CareerScreenState extends State<CareerScreen> {
                             return const CircularProgressIndicator();
                           }
                         }
-                      }),
+                      }
+                    ),
                 ),
               ],
             );
-          }),
+          }
+        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/addCareer');
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

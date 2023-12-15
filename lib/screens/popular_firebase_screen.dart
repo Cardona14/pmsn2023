@@ -40,7 +40,7 @@ class _PopularFirebaseScreenState extends State<PopularFirebaseScreen> {
             if (snapshot.hasError) {
               return const Center(child: Text('Error'));
             }else{
-              return const Center(child: Text('Error'));
+              return const Center(child: CircularProgressIndicator());
             }
           }
         }

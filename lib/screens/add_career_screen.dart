@@ -75,12 +75,13 @@ class _AddCareerScreenState extends State<AddCareerScreen> {
     return Scaffold(
       appBar: AppBar(
         title: widget.careerModel == null
-            ? const Text('Carrera agregada')
-            : const Text('Carrera actualizada'),
+            ? const Text('Agregar carrera')
+            : const Text('Actualizar carrera'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
+          
           children: [txtCareerName, space, btnSave],
         ),
       ),

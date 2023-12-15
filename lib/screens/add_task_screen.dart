@@ -187,8 +187,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     return Scaffold(
       appBar: AppBar(
         title: widget.taskModel == null
-            ? const Text("Tarea agregada")
-            : const Text("Tarea actualizada"),
+            ? const Text("Agregar tarea")
+            : const Text("Actualizar tarea"),
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -11,7 +11,6 @@ class PopularScreen extends StatefulWidget {
 }
 
 class _PopularScreenState extends State<PopularScreen> {
-
   ApiPopular? apiPopular;
 
   @override
@@ -23,21 +22,10 @@ class _PopularScreenState extends State<PopularScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Popular Movies'),
-        leading: Row(
-            children: <Widget>[
-              const SizedBox(width: 5.0),
-              IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () => Navigator.pushNamed(context, '/dash'),
-              ),
-            ],
-          ),
-      ),
+      appBar: AppBar(title: const Text('Popular Movies')),
       body: FutureBuilder(
         future: apiPopular!.getAllPopular(),
-      builder: (context, AsyncSnapshot<List<PopularModel>?> snapshot) {
+        builder: (context, AsyncSnapshot<List<PopularModel>?> snapshot) {
           if( snapshot.hasData){
             return GridView.builder(
               padding: const EdgeInsets.all(10),
@@ -48,7 +36,7 @@ class _PopularScreenState extends State<PopularScreen> {
                 mainAxisSpacing: 10,
               ),
               itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
+              itemBuilder: (context, index, ) {
                 return itemMovieWidget(snapshot.data![index], context);
               },
             );

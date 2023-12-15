@@ -25,25 +25,7 @@ class _TeacherScreenState extends State<TeacherScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mestros'),
-        actions: [
-          IconButton(
-              onPressed: () async {
-                var res = await agendaDB!.GETALLCAREERS();
-                if (res.isEmpty) {
-                  // ignore: use_build_context_synchronously
-                  ArtSweetAlert.show(
-                    context: context,
-                    artDialogArgs: ArtDialogArgs(
-                      type: ArtSweetAlertType.danger,
-                      title: "¡Error!",
-                      text: "Se debe registrar al menos una carrera para agregar docentes"));
-                } else {
-                  Navigator.pushNamed(context, '/addTeacher');
-                }
-              },
-              icon: const Icon(Icons.add))
-        ],
+        title: const Text('Maestros'),
       ),
       body: ValueListenableBuilder(
           valueListenable: GlobalValues.flagDB,
@@ -89,7 +71,25 @@ class _TeacherScreenState extends State<TeacherScreen> {
                 ),
               ],
             );
-          }),
+          }
+        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          var res = await agendaDB!.GETALLCAREERS();
+          if (res.isEmpty) {
+            // ignore: use_build_context_synchronously
+            ArtSweetAlert.show(
+              context: context,
+              artDialogArgs: ArtDialogArgs(
+                type: ArtSweetAlertType.danger,
+                title: "¡Error!",
+                text: "Se debe registrar al menos una carrera para agregar docentes"));
+          } else {
+            Navigator.pushNamed(context, '/addTeacher');
+          }
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

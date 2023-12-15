@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pmsn2023/models/career_model.dart';
+import 'package:pmsn2023/models/popular_model.dart';
 import 'package:pmsn2023/models/task_model.dart';
 import 'package:pmsn2023/models/teacher_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -12,7 +13,7 @@ import 'package:sqflite/sqflite.dart';
 class AgendaDB {
 
   static const nameDB = 'AGENDADB';
-  static const versionDB = 1;
+  static const versionDB = 2;
   static Database? _database;
   
   Future<Database?> get database async {
@@ -60,6 +61,23 @@ class AgendaDB {
         nameCareer VARCHAR(100)
       );
     ''');
+
+    db.execute('''
+      CREATE TABLE tblMovies(
+        id INTEGER PRIMARY KEY,
+        backdrop_path TEXT,
+        original_language TEXT,
+        original_title TEXT,
+        overview TEXT,
+        popularity REAL,
+        poster_path TEXT,
+        release_date TEXT,
+        title TEXT, 
+        vote_average REAL,
+        vote_count INTEGER,
+        trailerVideo TEXT
+      );
+    ''');
   }
 
   Future<int> INSERT(String tName, Map<String, dynamic> data) async {
@@ -92,6 +110,8 @@ class AgendaDB {
     var connection = await database;
     await connection!.delete(table, where: '1=1');
   }
+
+  //Practica 4 Agenda de Tareas
 
   Future<List<TaskModel>> GETALLTASKS() async {
     var connection = await database;
@@ -153,4 +173,20 @@ class AgendaDB {
     return result.map((task) => TaskModel.fromMap(task)).toList();
   }
 
+  //Practica 5 PopularMovies
+  Future<List<PopularModel>> GETALLMOVIES() async {
+    var connection = await database;
+    var result = await connection!.query('tblMovies');
+    return result.map((movie) => PopularModel.fromMap(movie)).toList();
+  }
+
+  Future<PopularModel?> GETMOVIE(int objectId) async {
+    var connection = await database;
+    var result = await connection!.query('tblMovies', where: 'id = ?', whereArgs: [objectId]);
+    if (result.isEmpty) {
+      return null;
+    } else {
+      return result.map((movie) => PopularModel.fromMap(movie)).toList().first;
+    }
+  }
 }
